@@ -7,16 +7,16 @@ import CarouselItem from '../components/CarouselItem'
 import Footer from '../components/Footer'
 import useInitialState from '../hooks/useInitialState'
 
-import '../assets/styles/App.scss'
+import '../assets/styles/Home.scss'
 
 const API = 'http://localhost:3000/initalState/'
 
-const App = () => {
+const Home = () => {
   const initialState = useInitialState(API)
   return initialState.length === 0 ? (
     <h1>Loading...</h1>
   ) : (
-    <div className='App'>
+    <div className='Home'>
       <Header />
       <Search />
       {initialState.mylist.length > 0 && ( //Creamos una validación mylist que los registros sean mayor a 0
@@ -56,4 +56,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home
