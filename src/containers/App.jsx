@@ -5,43 +5,51 @@ import Categories from '../components/Categories'
 import Carousel from '../components/Carousel'
 import CarouselItem from '../components/CarouselItem'
 import Footer from '../components/Footer'
+import useInitialState from '../hooks/useInitialState'
 
 import '../assets/styles/App.scss'
 
+const API = 'http://localhost:3000/initalState/'
+
 const App = () => {
-  const [videos, setVideos] = useState({ mylist: [], trends: [], originals: [] })
-
-  useEffect(() => {
-    fetch('http://localhost:3000/initalState')
-      .then(response => response.json())
-      .then(data => setVideos(data))
-  }, [])
-
-  return (
+  const initialState = useInitialState(API)
+  return initialState.length === 0 ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className='App'>
       <Header />
       <Search />
-      {videos.mylist.length > 0 && ( //Creamos una validación que los registros sean mayor a 0
+      {initialState.mylist.length > 0 && ( //Creamos una validación mylist que los registros sean mayor a 0
         <Categories title='Mi Lista'>
           <Carousel>
-            <CarouselItem />
+            {initialState.mylist.map(item => (
+              <CarouselItem key={item.id} {...item} />
+            ))}
           </Carousel>
         </Categories>
       )}
 
-      <Categories title='Tendencias'>
-        <Carousel>
-          {videos.trends.map(item => (
-            <CarouselItem key={item.id} {...item} />
-          ))}
-        </Carousel>
-      </Categories>
+      {initialState.trends.length > 0 && ( //Creamos una validación trends que los registros sean mayor a 0
+        <Categories title='Tendencias'>
+          <Carousel>
+            {initialState.trends.map(item => (
+              <CarouselItem key={item.id} {...item} />
+            ))}
+          </Carousel>
+        </Categories>
+      )}
 
-      <Categories title='Originales de PlatziVideo'>
-        <Carousel>
-          <CarouselItem />
-        </Carousel>
-      </Categories>
+      {initialState.originals.length > 0 && ( //Creamos una validación originals que los registros sean mayor a 0
+        <Categories title='Originales de PlatziVideo'>
+          <Carousel>
+            <Carousel>
+              {initialState.originals.map(item => (
+                <CarouselItem key={item.id} {...item} />
+              ))}
+            </Carousel>
+          </Carousel>
+        </Categories>
+      )}
 
       <Footer />
     </div>
