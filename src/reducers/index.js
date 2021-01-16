@@ -3,13 +3,15 @@ const reducer = (state, action) => {
     case 'SET_FAVORITE':
       return {
         ...state, //Traajamos con el estado que ya tenemos
-        myList: [...state.myList, action.payload]
+        myList: state.myList.filter(items => items.id === action.payload.id).length === 0
+        ? [ ...state.myList, action.payload]
+        : [ ...state.myList ]
       }
 
     case 'DELETE_FAVORITE':
       return {
         ...state, //Traajamos con el estado que ya tenemos
-        myList: state.myList.filter(items => items.id !== action.payload)
+        myList: state.myList.filter(items => items.id !== action.payload)//Validamos el item a liminar por id
       }
 
     default:
