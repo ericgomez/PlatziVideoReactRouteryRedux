@@ -83,7 +83,8 @@
     "no-extra-bind": 2,
     "no-extra-boolean-cast": 2,
     "no-extra-parens": 0,
-    "no-extra-semi": 0,
+    //"no-extra-semi": 0, //usa la siguiente regla para validar el punto y coma 
+    "no-extra-semi": [2, "always"],
     "no-extra-strict": 0,
     "no-fallthrough": 2,
     "no-floating-decimal": 2,
