@@ -28,6 +28,12 @@ const reducer = (state, action) => {
         user: action.payload
       }
 
+    case 'REGISTER_REQUEST':
+      return {
+        ...state, //Trabajamos con el estado que ya tenemos
+        user: action.payload
+      }
+
     default:
       return state
   }
