@@ -19,7 +19,13 @@ const reducer = (state, action) => {
     case 'LOGIN_REQUEST':
       return {
         ...state, //Trabajamos con el estado que ya tenemos
-        user: action.payload,
+        user: action.payload
+      }
+
+    case 'LOGOUT_REQUEST':
+      return {
+        ...state, //Trabajamos con el estado que ya tenemos
+        user: action.payload
       }
 
     default:
